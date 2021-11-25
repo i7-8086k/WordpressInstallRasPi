@@ -3,30 +3,13 @@ sudo apt update && sudo apt upgrade -y
 
 echo '0 3 * * * /sbin/shutdown -r now' | sudo tee -a /etc/crontab
 
-sudo apt-get install unclutter -y
+sudo apt-get install --no-install-recommends xserver-xorg x11-xserver-utils xinit
 
-sudo service lightdm restart
+startx
 
-touch /etc/xdg/lxsession/LXDE-pi/autostart
 
-echo '@lxpanel --profile LXDE
-@pcmanfm --desktop --profile LXDE
-@xset s off
-@xset -dpms
-@xset s noblank
-@chromium-browser –kiosk https://i7-8086k.github.io/Kiosk/
 
-@/home/pi/run.sh' | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
-
-touch /home/pi/run.sh
-
-echo '#!/bin/sh
-/usr/bin/chromium-browser --app=https://i7-8086k.github.io/Kiosk/
-  --kiosk
-  --noerrdialogs
-  --disable-session-crashed-bubble
-  --disable-infobars
-  --check-for-update-interval=604800
-  --disable-pinch' | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
-
-chmod +x /home/pi/run.sh
+echo '@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+@xscreensaver -no-splash
+/usr/bin/chromium-browser --kiosk  --disable-restore-session-state https://i7-8086k.github.io/Kiosk/' | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
