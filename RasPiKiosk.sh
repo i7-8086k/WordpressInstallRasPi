@@ -1,11 +1,13 @@
 #!/bin/bash
-sudo apt-get update && sudo apt-get upgrade -y
+sudo apt update && sudo apt upgrade -y
 
 echo '0 3 * * * /sbin/shutdown -r now' | sudo tee -a /etc/crontab
 
-sudo apt-get install unclutter
+sudo apt-get install unclutter -y
 
 sudo service lightdm restart
+
+touch /etc/xdg/lxsession/LXDE-pi/autostart
 
 echo '@lxpanel --profile LXDE
 @pcmanfm --desktop --profile LXDE
@@ -17,5 +19,14 @@ echo '@lxpanel --profile LXDE
 @/home/pi/run.sh' | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
 
 touch /home/pi/run.sh
+
+echo '#!/bin/sh
+/usr/bin/chromium-browser --app=https://i7-8086k.github.io/Kiosk/
+  --kiosk
+  --noerrdialogs
+  --disable-session-crashed-bubble
+  --disable-infobars
+  --check-for-update-interval=604800
+  --disable-pinch' | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
 
 chmod +x /home/pi/run.sh
