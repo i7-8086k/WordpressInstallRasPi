@@ -5,10 +5,10 @@ sudo nano /etc/crontab
 
 echo '0 3 * * * /sbin/shutdown -r now' | sudo tee -a /etc/crontab
 
-sudo nano /home/pi/.config/lxsession/LXDE-pi/autostart
+sudo nano /home/pi/.xinitrc
 
-echo 'sudo nano /home/pi/.config/lxsession/LXDE-pi/autostart
-@xset s off
+echo '@xset s off
 @xset -dpms
 @xset s noblank
-@chromium-browser –kiosk https://i7-8086k.github.io/Kiosk/' | sudo tee -a sudo nano /home/pi/.config/lxsession/LXDE-pi/autostart
+@chromium-browser –kiosk https://i7-8086k.github.io/Kiosk/' | sudo tee -a sudo nano /home/pi/.xinitrc
+
