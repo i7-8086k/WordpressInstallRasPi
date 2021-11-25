@@ -20,13 +20,14 @@ echo '@lxpanel --profile LXDE
 
 touch /home/pi/run.sh
 
-echo '#!/bin/sh
+cho '#!/bin/sh
 /usr/bin/chromium-browser --app=https://i7-8086k.github.io/Kiosk/
   --kiosk
   --noerrdialogs
   --disable-session-crashed-bubble
   --disable-infobars
   --check-for-update-interval=604800
-  --disable-pinch' | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
+  --disable-pinch' | sudo tee -a /home/pi/run.sh
 
 chmod +x /home/pi/run.sh
+./home/pi/run.sh
